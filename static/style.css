@@ -1,0 +1,31 @@
+body{
+    background-color: #E0E0E0;
+    
+}
+
+.homeHeader{
+    text-align: center;
+}
+
+.homeDetails{
+    text-align:center;
+}
+
+p{
+    text-align: center;
+}
+
+div.container {
+    text-align: center;
+  }
+  
+  ul.myUL {
+    display: inline-block;
+    text-align: left;
+  }
+
+.random {
+    text-align: right;
+    color: black;
+    background-image: url(bunnymo.jpg);   
+}
