@@ -3,6 +3,10 @@ body{
     
 }
 
+.wrong{
+    background-color: red;
+}
+
 .homeHeader{
     text-align: center;
 }

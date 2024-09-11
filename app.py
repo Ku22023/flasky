@@ -28,6 +28,26 @@ def random_num():
     num = random.randint(1,100)
     return render_template('random.html',num=num)
 
+@app.route('/login')
+def login():
+    attempts = 3
+    name = str(input("What's your name? "))
+    while attempts >= 1:
+        pin = int(input("Enter your PIN: "))
+        lenpin = str(pin)
+        if len(lenpin) == 4:
+            if pin == 1234:
+                return render_template('correct.html',name=name)
+            else:
+                attempts -= 1
+                print(attempts)
+                print("Wrong")
+        else:
+            print("Pin must be 4 digits long!")
+    else:       
+        return render_template('wrong.html',name=name)
+
+
 # main driver function
 if __name__ == '__main__':
     app.run(debug=True)
