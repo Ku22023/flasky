@@ -33,3 +33,13 @@ div.container {
     color: black;
     background-image: url(bunnymo.jpg);   
 }
+
+.jianan {
+    text-align: center;
+}
+
+.bunny {
+    size: 50px;
+    align-items: center;
+    padding-left: 10%;
+}

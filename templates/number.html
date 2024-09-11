@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+<body class="number">
+    {% block body %}
+        <h1>Guess a number!</h1>
+        <img src= "{{url_for('static', filename='bunnymo.jpg')}}" id="bunny">
+        <form method="post" class="jianan">
+            <label for="number">Number</label>
+            <input type="text" name="number" id="number" required>
+            <button type="submit">Guess!</button>
+        </form>
+        <p>{{ ans }}</p>
+    {% endblock %}
+</body>

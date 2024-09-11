@@ -1,6 +1,6 @@
 # Importing flask module in the project is mandatory
 #Render template is used to load in HTML files
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import random
 
 # We use this to set up our flask sever
@@ -47,6 +47,27 @@ def login():
     else:       
         return render_template('wrong.html',name=name)
 
+@app.route('/guess',methods=('GET','POST'))
+def guess():
+    try:
+        num = -1
+        if request.method == 'POST':
+            num = request.form['number']
+            print(num)
+        if int(num) <= -1:
+            return render_template('number.html')
+        else:
+            print(num)
+            if int(num) == 10:
+                ans = "You gyatt it!"
+                return render_template('number.html',ans=ans)
+            else:
+                ans = "wrong wrong wrong"
+                return render_template('number.html',ans=ans)
+    except:
+        ans = "use integers only pretty please"
+        return render_template('number.html',ans=ans)
+    
 
 # main driver function
 if __name__ == '__main__':
