@@ -8,6 +8,16 @@
 </head>
  
 <body>
+    <ul id="navbar">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('count') }}">Count</a></li>
+        <li><a href="{{ url_for('names') }}">List of Names</a></li>
+        <li><a href="{{ url_for('random_num') }}">Random Number</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('guess') }}">Guess</a></li>
+    </ul>
+
+
     <h2 class="homeHeader">Welcome To My Homepage</h2>
     <h4 class="homeDetails">Flask: Rendering Templates</h4>
  <!-- What appears before block body can be used as a basic template again -->  

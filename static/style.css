@@ -39,7 +39,29 @@ div.container {
 }
 
 .bunny {
-    size: 50px;
-    align-items: center;
-    padding-left: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}   
+
+.number {
+    text-align: center;
 }
+
+.navbar li{
+    line-height: 75px; /* Centers the height of the text in the nav bar */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%; /* Makes the nav bar stretch across the page */
+    height: 75px; 
+    background-color: rgb(46, 102, 44);              
+    color: white;
+    font-size: 25px; 
+    word-spacing: 25px; /* How far away the items are from each other, makes it easier to see. */
+    text-align: left; 
+  }
+
+.navbar li:hover { /* Makes site more responsive by changing underline and background colour. */
+    text-decoration: underline;
+    background-color: rgb(14, 77, 6);
+} 
