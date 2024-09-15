@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+<body class="login">
+    {% block body %}
+        <h1 class="login">Login</h1>
+        <form method="post" class="login">
+            <label for="text">Username: </label>
+            <input type="text" name="username" id="username" required>
+            <label for="text">PIN: </label>
+            <input type="text" name="pin" id="pin" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>{{ ans }}</p>
+    {% endblock %}
+</body>

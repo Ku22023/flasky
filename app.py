@@ -28,24 +28,30 @@ def random_num():
     num = random.randint(1,100)
     return render_template('random.html',num=num)
 
-@app.route('/login')
+@app.route('/login',methods=('GET','POST'))
 def login():
-    attempts = 3
-    name = str(input("What's your name? "))
-    while attempts >= 1:
-        pin = int(input("Enter your PIN: "))
-        lenpin = str(pin)
-        if len(lenpin) == 4:
-            if pin == 1234:
-                return render_template('correct.html',name=name)
-            else:
-                attempts -= 1
-                print(attempts)
-                print("Wrong")
+    pin = -1
+    username = "placeholder"
+    ans = "Hi"
+    if request.method == 'POST':
+        username = request.form['username']
+        print(username)
+        print(username)
+        username = str.lower(username)
+        return render_template('login.html',ans=ans)
+    if username == 'kyle':
+        pin = request.form['pin']
+        if int(pin) == 1234:
+            ans = "Welcome, Kyle!"
+            return render_template('login.html',ans=ans)
         else:
-            print("Pin must be 4 digits long!")
-    else:       
-        return render_template('wrong.html',name=name)
+            ans = "Error: Username or Password is incorrect!"
+            return render_template('login.html',ans=ans)
+    else:
+        ans = "Error: Username or Password is incorrect!"
+        return render_template('login.html',ans=ans)
+
+
 
 @app.route('/guess',methods=('GET','POST'))
 def guess():
