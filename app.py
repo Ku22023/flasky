@@ -53,33 +53,74 @@ def guess():
         ans = "use integers only pretty please"
         return render_template('number.html',ans=ans)
     
+    # Database connection function
 def get_db_connection():
     conn = sqlite3.connect('login.db')
     conn.row_factory = sqlite3.Row
     return conn
-
+    
+# Initialize the database with a games table
 def init_db():
-    conn = get_db_connection()
+    conn = get_db_connection() 
     with app.open_resource('schema.sql') as f:
-        conn.executescript(f.read().decode('utf8'))
+        conn.executescript (f.read().decode('utf8'))
     conn.close()
 
-@app.route('/login',methods=('POST','GET'))
+@app.route('/login', methods=('POST', 'GET'))
 def login():
     if request.method == 'POST':
         user_name = request.form['userName']
         password = request.form['password']
 
-        if not user_name or not password:
-            flash('All fields required')
+        if not user_name or not password: 
+            flash('All Fields required')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO user (username,password) VALUES (?,?)',(user_name,password))
+            conn.execute('INSERT INTO users (username, password) VALUES (?,?)', (user_name, password))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
     return render_template("login.html")
 
-# main driver function
+@app.route('/admin')
+def admin():
+    conn = get_db_connection()
+    sql = "SELECT * FROM users"
+    users = conn.execute(sql).fetchall()
+    conn.close()
+    return render_template('view_users.html', users=users)
+# Route to edit a game
+
+@app.route('/edit/<int:id>', methods=('GET', 'POST'))
+def edit_user(id):
+    conn = get_db_connection()
+    users = conn.execute('SELECT * FROM users WHERE id=?', (id,)).fetchone()
+
+    if request.method == 'POST':
+        user_name = request.form['userName']
+        password = request.form['password']
+
+        if not user_name or not password: 
+            flash('All fields are required!')
+        else:
+            conn.execute('UPDATE users SET username = ?, password = ? WHERE id = ?', 
+                (user_name, password, id))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('admin'))
+            
+    return render_template('edit_user.html', users=users)
+
+    #Route to delete a game
+@app.route('/delete/<int:id>', methods=('POST',))
+def delete_user(id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM users WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('User deleted successfully!')
+    return redirect(url_for('admin'))
+
+# main driver function #MAKE SURE THIS STAYS AT THE BOTTOM AT ALL TIMES
 if __name__ == '__main__':
     app.run(debug=True)
